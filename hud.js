@@ -42,7 +42,7 @@ function Hud() {
       push();
       textSize(32);
       fill(255);
-      text("GAME OVER", (width / 2) - 100, height / 2);
+      text("GAME OVER SPACEAPE", (width / 2) - 100, height / 2);
     }
   }
 
