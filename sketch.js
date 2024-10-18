@@ -123,7 +123,7 @@ function draw() {
   // Add the "spaceape" text
   fill(255);  // Set text color to white
   textAlign(LEFT, BOTTOM);  // Align text to bottom-left
-  textSize(16);  // Set text size
+  textSize(32);  // Set text size
   text("spaceape", 30, height - 30);  // Draw text
 }
 
