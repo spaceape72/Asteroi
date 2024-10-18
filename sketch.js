@@ -17,13 +17,14 @@ function preload() {
   // Laser and Explosion Sound Effects are loaded here as opposed to the laser
   // or asteroid files because the asteroid destruction logic is here and it
   // also reduces redundancy of each asteroid or laser containing sound data.
-  for (var i =0; i < 3; i++){
-    laserSoundEffects[i] = loadSound('audio/pew-'+i+'.mp3');
+  for (var i = 0; i < 3; i++) {
+    laserSoundEffects[i] = loadSound('audio/pew-' + i + '.mp3');
   }
-  for (var i =0; i < 3; i++){
-    explosionSoundEffects[i] = loadSound('audio/explosion-'+i+'.mp3');
+  for (var i = 0; i < 3; i++) {
+    explosionSoundEffects[i] = loadSound('audio/explosion-' + i + '.mp3');
   }
 }
+
 var score = 0;
 var lives = 3;
 var points = [100, 50, 20]; // small, med, large points
@@ -39,14 +40,14 @@ function setup() {
 function draw() {
   // Handles the round loss, destruction of ship and round restart when the
   // ship contacts an asteroid.
-  for(var i = 0; i < asteroids.length; i++) {
-    if(ship.hits(asteroids[i]) && canPlay) {
+  for (var i = 0; i < asteroids.length; i++) {
+    if (ship.hits(asteroids[i]) && canPlay) {
       canPlay = false;
       ship.destroy();
       input.reset();
       setTimeout(function() {
         lives--;
-        if(lives >= 0) {
+        if (lives >= 0) {
           ship = new Ship();
           canPlay = true;
         }
@@ -56,12 +57,11 @@ function draw() {
   }
 
   // Update the lasers' positions
-  for(var i = lasers.length - 1; i >= 0; i--) {
+  for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].update();
-    if(lasers[i].offscreen()) {
+    if (lasers[i].offscreen()) {
       // Destroy lasers that go off screen.
       lasers.splice(i, 1);
-
       continue;
     }
 
@@ -82,7 +82,7 @@ function draw() {
         // Laser and previous asteroid are removed as per the rules of the game.
         asteroids.splice(j, 1);
         lasers.splice(i, 1);
-        if(asteroids.length == 0) {
+        if (asteroids.length == 0) {
           // Next level
           level++;
           spawnAsteroids();
@@ -119,10 +119,16 @@ function draw() {
   for (var i = dust.length - 1; i >= 0; i--) {
     dust[i].render();
   }
+
+  // Add the "spaceape" text
+  fill(255);  // Set text color to white
+  textAlign(LEFT, BOTTOM);  // Align text to bottom-left
+  textSize(16);  // Set text size
+  text("spaceape", 10, height - 10);  // Draw text
 }
 
 function spawnAsteroids() {
-  for(var i = 0; i < level + 5; i++) {
+  for (var i = 0; i < level + 5; i++) {
     asteroids.push(new Asteroid(null, null, 2));
   }
 }
@@ -138,7 +144,7 @@ function lineIntersect(l1v1, l1v2, l2v1, l2v2) {
   var direction_cross = cross(l2_vector, l1_vector);
   var t = cross(base, l1_vector) / direction_cross;
   var u = cross(base, l2_vector) / direction_cross;
-  if(t >= 0 && t <= 1 && u >= 0 && u <= 1) {
+  if (t >= 0 && t <= 1 && u >= 0 && u <= 1) {
     return true;
   } else {
     return false;
