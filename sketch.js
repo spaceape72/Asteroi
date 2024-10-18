@@ -124,7 +124,7 @@ function draw() {
   fill(255);  // Set text color to white
   textAlign(LEFT, BOTTOM);  // Align text to bottom-left
   textSize(16);  // Set text size
-  text("spaceape", 10, height - 10);  // Draw text
+  text("spaceape", 30, height - 30);  // Draw text
 }
 
 function spawnAsteroids() {
